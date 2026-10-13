@@ -1723,5 +1723,13 @@ function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;'
 // Init
 renderLibrary();
 </script>
+<script>
+window.addEventListener('error', function (e) { try { console.error("Global error:", e.error || e.message, e); } catch(err) {} });
+setTimeout(function () {
+  if (!document.querySelector(".view.active")) {
+    try { showView("auth"); } catch (e) { console.error("showView failed", e); }
+  }
+}, 1000);
+</script>
 </body>
 </html>
