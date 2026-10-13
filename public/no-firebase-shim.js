@@ -23,7 +23,7 @@ async function __refreshAuth() {
 
 const auth = {
   get currentUser() { return __AuthState.user; },
-  Persistence: (typeof firebase !== 'undefined' && firebase?.auth?.Auth?.Persistence) ? firebase.auth.Auth.Persistence : { LOCAL: 'LOCAL', SESSION: 'SESSION' },
+  Persistence: { LOCAL: 'LOCAL', SESSION: 'SESSION' },
   onAuthStateChanged(cb) {
     __AuthState.listeners.push(cb);
     if (__AuthState.initDone) cb(__AuthState.user);
