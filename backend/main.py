@@ -210,6 +210,14 @@ def update_me(data: dict, request: Request):
     c.close()
     return {"ok": True}
 
+@app.get("/api/users/bootstrap")
+def users_bootstrap(request: Request):
+    require_user(request)
+    c = dbconn()
+    count = c.execute("SELECT COUNT(*) FROM users").fetchone()[0]
+    c.close()
+    return {"empty": count == 0}
+
 # Cloud games
 @app.get("/api/cloud-games")
 def cloud_list():

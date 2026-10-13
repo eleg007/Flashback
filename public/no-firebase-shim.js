@@ -137,10 +137,18 @@ CollectionRef.prototype.doc = function(id) {
     },
     update: async (data) => {
       if (col === 'users') {
-        // allow admin-style user status updates to delegate to backend
+        const payload = {};
+        if (data.username !== undefined) payload.username = data.username;
+        if (data.email !== undefined) payload.email = data.email;
+        if (data.status !== undefined) payload.status = data.status;
+        if (data.role !== undefined) payload.role = data.role;
+        if (data.cloudBanned !== undefined) payload.cloud_banned = data.cloudBanned;
+        await fetch(`/api/admin/users/${id}/update`, { method:'POST', credentials:'include', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+        if (data.cloudBanned !== undefined) {
+          await fetch(`/api/admin/users/${id}/cloud-ban`, { method:'POST', credentials:'include', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ banned: !!data.cloudBanned }) });
+        }
         return { ok: true };
       }
-      if (col === 'cloudGames' && data && '__playCount' in data) {}
       if (col === 'cloudGames') {
         if (data && Object.prototype.hasOwnProperty.call(data, 'playCount') && data.playCount && data.playCount.__inc) {
           await fetch(`/api/cloud-games/${id}/play`, { method:'POST', credentials:'include' });
