@@ -7,6 +7,7 @@ functions/.env.emulation2k
 __pycache__/
 *.py[cod]
 .venv/
+venv/
 .pytest_cache/
 
 # Runtime data
@@ -18,20 +19,16 @@ uploads/
 firebase-debug.log
 firestore-debug.log
 storage-debug.log
-storage-debug.log
 
-# Firebase optional local tooling
+# Firebase local tooling cache (keep source/config committed)
 .firebase/
 firebase-export/
-firebase.json
-.firebaserc
-firestore.rules
-storage.rules
-functions/
 
 # Node
 node_modules/
-package-lock.json
+
+# Nested bare git repository (archive artifact, not part of this project)
+git-repo/
 
 # OS
 .DS_Store

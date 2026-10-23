@@ -1,0 +1,19 @@
+[Unit]
+Description=Emulation2K public gateway and static server
+After=network.target emulation2k.service
+Wants=emulation2k.service
+
+[Service]
+Type=simple
+User=emulation2k
+Group=emulation2k
+WorkingDirectory=/opt/emulation2k
+Environment=PYTHONPATH=/opt/emulation2k
+ExecStart=/opt/emulation2k/.venv/bin/uvicorn gateway:app --host 127.0.0.1 --port 8010 --no-server-header
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

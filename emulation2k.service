@@ -1,0 +1,21 @@
+[Unit]
+Description=Flashback FastAPI backend
+After=network.target
+
+[Service]
+Type=simple
+User=emulation2k
+Group=emulation2k
+WorkingDirectory=/opt/emulation2k
+Environment=PYTHONPATH=/opt/emulation2k
+Environment=FLASHBACK_ADMIN_EMAIL=admin@flashback.local
+Environment=FLASHBACK_ADMIN_PASSWORD=ChangeMe123!
+Environment=FLASHBACK_ADMIN_NAME=Flashback Owner
+ExecStart=/opt/emulation2k/.venv/bin/uvicorn backend.main:app --host 127.0.0.1 --port 8010 --no-server-header
+Restart=always
+RestartSec=3
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

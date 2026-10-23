@@ -1,0 +1,19 @@
+[Unit]
+Description=Emulation2K ngrok tunnel
+After=network.target emulation2k-gateway.service
+Wants=emulation2k-gateway.service
+
+[Service]
+Type=simple
+User=emulation2k
+Group=emulation2k
+Environment=HOME=/home/emulation2k
+WorkingDirectory=/home/emulation2k
+ExecStart=/usr/local/bin/ngrok http 8010 --config=/home/emulation2k/ngrok.yml
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

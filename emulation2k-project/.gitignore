@@ -1,0 +1,32 @@
+# Secrets and local environment
+.env
+functions/.env.emulation2k
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+
+# Runtime data
+data/
+*.sqlite3
+*.sqlite3-*
+uploads/
+*.log
+firebase-debug.log
+firestore-debug.log
+storage-debug.log
+storage-debug.log
+
+# Firebase local tooling cache (keep source/config committed)
+.firebase/
+firebase-export/
+
+# Node
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
